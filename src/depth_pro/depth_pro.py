@@ -21,7 +21,7 @@ from .network.decoder import MultiresConvDecoder
 from .network.encoder import DepthProEncoder
 from .network.fov import FOVNetwork
 from .network.vit_factory import VIT_CONFIG_DICT, ViTPreset, create_vit
-
+import os
 
 @dataclass
 class DepthProConfig:
@@ -36,10 +36,12 @@ class DepthProConfig:
     use_fov_head: bool = True
 
 
+CD=os.path.dirname(os.path.abspath(__file__))
+
 DEFAULT_MONODEPTH_CONFIG_DICT = DepthProConfig(
     patch_encoder_preset="dinov2l16_384",
     image_encoder_preset="dinov2l16_384",
-    checkpoint_uri="./checkpoints/depth_pro.pt",
+    checkpoint_uri=CD+"/../../checkpoints/depth_pro.pt",
     decoder_features=256,
     use_fov_head=True,
     fov_encoder_preset="dinov2l16_384",
