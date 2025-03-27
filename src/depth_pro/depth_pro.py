@@ -285,7 +285,8 @@ class DepthPro(nn.Module):
             f_px = 0.5 * W / torch.tan(0.5 * torch.deg2rad(fov_deg.to(torch.float)))
         
         inverse_depth = canonical_inverse_depth * (W / f_px)
-        f_px = f_px.squeeze()
+        if not isinstance(f_px, float):
+            f_px = f_px.squeeze()
 
         if resize:
             inverse_depth = nn.functional.interpolate(
